@@ -1,0 +1,28 @@
+on: [push]
+name: Exporting variables by overwriting
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: kanga333/variable-mapper@master
+      id: export
+      with:
+        key: "first"
+        map: |
+          {
+            "first": {
+              "env1": "value1",
+              "env2": "value2"
+            },
+            ".*": {
+              "env1": "value1_overwrite",
+              "env3": "value3"
+            }
+          }
+        export_to: env
+        mode: overwrite
+    - name: Echo environment and output
+      run: |
+        echo ${{ env.env1 }}
+        echo ${{ env.env2 }}
+        echo ${{ env.env3 }}
