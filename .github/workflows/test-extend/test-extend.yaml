@@ -1,0 +1,8 @@
+name: TEST extend
+inputs:
+  environment:
+    required: true
+  runs:
+    steps:
+      run: |
+        echo ${{inputs.environmet}}
