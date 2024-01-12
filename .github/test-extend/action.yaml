@@ -3,6 +3,7 @@ inputs:
   environment: 
     required: true
   runs:
+    using: "composite"
     steps:
       - name:
         run: |
