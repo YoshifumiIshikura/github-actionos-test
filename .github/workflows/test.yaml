@@ -4,25 +4,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: kanga333/variable-mapper@master
-      id: export
-      with:
-        key: "first"
-        map: |
-          {
-            "first": {
-              "env1": "value1",
-              "env2": "value2"
-            },
-            ".*": {
-              "env1": "value1_overwrite",
-              "env3": "value3"
+      - name: Export environment type
+        uses: kanga333/variable-mapper@v0.3.0
+        with:
+          key: "${{ steps.extract_env.outputs.branch }}"
+          map: |
+            {
+              "main": {
+                "environment": "prod"
+              },
+              "release": {
+                "environment": "stg"
+              },
+              "develop": {
+                "environment": "dev"
+              },
+              "sandbox1":{
+                "environment": "sandbox1"
+              },
+              "sandbox2":{
+                "environment": "sandbox2"
+              },
+              ".*": {
+                "environment": "unmapped"
+              }
             }
-          }
-        export_to: env
-        mode: overwrite
-    - name: Echo environment and output
-      run: |
-        echo ${{ env.env1 }}
-        echo ${{ env.env2 }}
-        echo ${{ env.env3 }}
+      - name: Echo environment and output
+        run: |
+          echo ${{ env.environment }}
