@@ -45,6 +45,6 @@ jobs:
         run: |
           echo ${{ env.environment }}
       - name: test extend
-        uses: .github/test-extend
+        uses: ./.github/test-extend
         with:
           environment: ${{env.environment}}
