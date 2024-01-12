@@ -1,6 +1,7 @@
 name: 'Test ./.github/test-extend'
 inputs:
-  environment: 
+    environment:
+    description: 'test env'
     required: true
   runs:
     using: "composite"
