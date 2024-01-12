@@ -4,6 +4,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Extract env name
+        shell: bash
+        id: extract_env
+        run: |
+          branch=${GITHUB_REF#refs/heads/}
+          name=${branch%%/*}
+          echo "BRANCH=$(echo ${branch%%/*})" >> $GITHUB_OUTPUT
+          echo "FULL_BRANCH=$(echo ${branch})" >> $GITHUB_OUTPUT
+      - name: Echo branch
+        run : |
+          echo ${{steps.extract_env.outputs.branch}}
       - name: Export environment type
         uses: kanga333/variable-mapper@v0.3.0
         with:
