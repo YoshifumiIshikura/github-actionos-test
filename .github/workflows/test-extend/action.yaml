@@ -1,8 +1,9 @@
-name: TEST extend
+name: 'Test ./.github/test-extend'
 inputs:
-  environment:
+  environment: 
     required: true
   runs:
     steps:
-      run: |
-        echo ${{inputs.environmet}}
+      - name:
+        run: |
+          echo ${{inputs.environment}}
